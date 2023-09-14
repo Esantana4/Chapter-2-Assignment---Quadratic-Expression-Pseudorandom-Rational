@@ -1,4 +1,12 @@
 #pragma once
+#include <iostream>
+
+// Credit:  Saul Merino & John Kim - Pseudorandom
+
+int inputInteger(std::string prompt);
+char inputChar(std::string prompt);
+void mainMenu();
+
 class Pseudorandom
 {
 private:
@@ -19,4 +27,7 @@ public:
     void setModulus(int newModulus);
     void generateSeed();
     double generateNextIndirectNum();
+    void pseudorandomMenu();
+    char pseudorandomMenuOption();
+    void generateIndirectNumTable(Pseudorandom pseudorandom);
 };

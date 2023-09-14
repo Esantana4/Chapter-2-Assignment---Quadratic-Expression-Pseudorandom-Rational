@@ -1,164 +1,232 @@
 #include "QuadraticExpression.h"
-#include <iostream>
-#include <cmath>
 
-// Credit: 
-// Joe Bryant & Erik Santana - Quadratic Expression
+// Credit: Joe Bryant & Erik Santana - Quadratic Expression
 
-
-// No argument constructor to initialize the values
 // Pre-Condition: no parameters
 // Post-Condition: no return. No argument constructor. Initializer constructor
 QuadraticExpression::QuadraticExpression()
 {
-    a = 0;
-    b = 0;
-    c = 0;
-    x = 0;
+    coefficientA = 0;
+    coefficientB = 0;
+    coefficientC = 0;
+    coefficientX = 0;
 }
 
-// Pre-Condition: parameters - int coefficientA, int coefficientB, int coefficientC, int coefficientX. These parameters are assigned to the private member variables.
+// Pre-Condition: parameters - int newCoefficientA, int newCoefficientB, int newCoefficientC, int newCoefficientX. These parameters are assigned to the private member variables.
 // Post-Condition: no return. Argument constructor
-QuadraticExpression::QuadraticExpression(int coefficientA, int coefficientB, int coefficientC, int coefficientX)
+QuadraticExpression::QuadraticExpression(int newCoefficientA, int newCoefficientB, int newCoefficientC, int newCoefficientX)
 {
-    a = coefficientA;
-    b = coefficientB;
-    c = coefficientC;
-    x = coefficientX;
+    coefficientA = newCoefficientA;
+    coefficientB = newCoefficientB;
+    coefficientC = newCoefficientC;
+    coefficientX = newCoefficientX;
 }
 
+//                                              Mutators
 
-// Mutators
-
-// Pre-Condition: parameter int coefficientA is assigned to the private member variable a.
-// Post-Condition: no return. This mutator member function sets/changes the private variable a. 
-void QuadraticExpression::setA(int coefficientA)
+// Pre-Condition: parameter int newCoefficientA is assigned to the private member variable coefficientA.
+// Post-Condition: no return. This mutator member function sets/changes the private variable coefficientA. 
+void QuadraticExpression::setA(int newCoefficientA)
 {
-    a = coefficientA;
+    coefficientA = newCoefficientA;
 }
 
-// Pre-Condition: parameter int coefficientB is assigned to the private member variable b.
-// Post-Condition: no return. This mutator member function sets/changes the private variable b. 
-void QuadraticExpression::setB(int coefficientB)
+// Pre-Condition: parameter int newCoefficientB is assigned to the private member variable coefficientB.
+// Post-Condition: no return. This mutator member function sets/changes the private variable coefficientB. 
+void QuadraticExpression::setB(int newCoefficientB)
 {
-    b = coefficientB;
+    coefficientB = newCoefficientB;
 }
 
-// Pre-Condition: parameter int coefficientC is assigned to the private member variable c.
-// Post-Condition: no return. This mutator member function sets/changes the private variable c. 
-void QuadraticExpression::setC(int coefficientC)
+// Pre-Condition: parameter int newCoefficientC is assigned to the private member variable coefficientC.
+// Post-Condition: no return. This mutator member function sets/changes the private variable coefficientC. 
+void QuadraticExpression::setC(int newCoefficientC)
 {
-    c = coefficientC;
+    coefficientC = newCoefficientC;
 }
 
-// Pre-Condition: parameter int coefficientX is assigned to the private member variable x.
-// Post-Condition: no return. This mutator member function sets/changes the private variable x. 
-void QuadraticExpression::setX(int coefficientX)
+// Pre-Condition: parameter int newCoefficientX is assigned to the private member variable coefficientX.
+// Post-Condition: no return. This mutator member function sets/changes the private variable coefficientX. 
+void QuadraticExpression::setX(int newCoefficientX)
 {
-    x = coefficientX;
+    coefficientX = newCoefficientX;
 }
 
-
-// Accessors
+//                                              Accessors
 
 // Pre-Condition: no parameters.
-// Post-Condition: returns a. Accessors function to get(view) the value of a
+// Post-Condition: returns coefficientA. Accessors function to get(view) the value of coefficientA
 int QuadraticExpression::getA() const
 {
-    return a;
+    return coefficientA;
 }
 
 // Pre-Condition: no parameters.
-// Post-Condition: returns b. Accessors function to get(view) the value of b
+// Post-Condition: returns coefficientB. Accessors function to get(view) the value of coefficientB
 int QuadraticExpression::getB() const
 {
-    return b;
+    return coefficientB;
 }
 
 // Pre-Condition: no parameters.
-// Post-Condition: returns c. Accessors function to get(view) the value of c
+// Post-Condition: returns coefficientC. Accessors function to get(view) the value of coefficientC
 int QuadraticExpression::getC() const
 {
-    return c;
+    return coefficientC;
 }
 
 // Pre-Condition: no parameters.
-// Post-Condition: returns x. Accessors function to get(view) the value of x
+// Post-Condition: returns coefficientX. Accessors function to get(view) the value of coefficientX
 int QuadraticExpression::getX() const
 {
-    return x;
+    return coefficientX;
 }
 
-// Pre-Condition: NA
-// Post-Condition: prints out quadratic equation
-void QuadraticExpression::displayEquation() const
+// Pre-Condition: no parameters
+// Post-Condition: no return. Sub menu, user picks an option.
+void QuadraticExpression::quadraticExpressionMenu()
 {
-    std::cout << "\t" << a << "x^2 + " << b << "x + " << c << std::endl << std::endl;
-}
 
-// Pre-Condition: NA 
-// Post-Condition: prints out result of solved quadratic equation with the given x
-void QuadraticExpression::getEvaluation() const
-{
-    double result = 0;
-
-    result = a * (pow(x, 2)) + (b * x) + c;
-
-    std::cout << "\tEvaluation result: " << result;
-}
-
-// Pre-Condition: NA
-// Post-Condition: prints out number of roots Quadratic equation has
-void QuadraticExpression::numRoots() const
-{
-    double discriminant = 0;
-
-    discriminant = (pow(b, 2)) - (4 * a * c);
-
-    if (discriminant < 0)
+    // loop through sub menu until user exits
+    do
     {
-        std::cout << "\n\tnumber of real roots: 0\n";
-    }
-    else if (discriminant == 0)
-    {
-        std::cout << "\n\tnumber of real roots: 1\n";
-    }
-    else if (discriminant > 0)
-    {
-        std::cout << "\n\tnumber of real roots: 2\n";
-    }
-}
+        system("cls");
+        std::cout << "\t\n1 > Quadratic Menu\n";
+        std::cout << "===========================================================\n";
+        std::cout << "1. Display the expression\n";
+        std::cout << "2. Set coefficient (A)\n";
+        std::cout << "3. Set coefficient (B)\n";
+        std::cout << "4. Set coefficient (C)\n";
+        std::cout << "5. Get evaluation (X)\n";
+        std::cout << "6. Get the number of real roots\n";
+        std::cout << "7. Get real root(s)\n";
+        std::cout << "------------------------------------------------------------\n";
+        std::cout << "0. Return to Main Menu\n";
+        std::cout << "===========================================================\n";
 
-// Pre-Condition: NA
-// Post-Condition: calculates the roots of quadratic equation and prints
-void QuadraticExpression::getRoots() const
-{
-    double discriminant = 0;
-    double root1 = 0;
-    double root2 = 0;
+        // get user input/option of main menu
+        int option = inputInteger("\n\tOption: ", 0, 7);
 
-    discriminant = (pow(b, 2)) - (4 * a * c);
+        switch (option)
+        {
+        case 0:
+        {
+            system("cls");
+            mainMenu();
+            break;
+        }
+        case 1:
+        {
+            std::cout << "\t\n" << coefficientA << "x^2 + " << coefficientB << "x + " << coefficientC << std::endl;
+            break;
+        }
+        case 2:
+        {
+            // Set coefficient (coefficientA)
+            coefficientA = inputInteger("\nEnter coefficient (A): ");
 
-    if (discriminant < 0)
-    {
-        std::cout << "\n\tno real roots\n";
-    }
-    else if (discriminant == 0)
-    {
-        root1 = (-b + (sqrt((pow(b, 2)) - (4 * a * c)))) / (2 * a);
+            std::cout << std::endl << "A = " << coefficientA << std::endl;
+            break;
+        }
+        case 3:
+        {
+            // Set coefficient (coefficientB)
+            coefficientB = inputInteger("\nEnter coefficient (B): ");
 
-        std::cout << "\n\tonly real root: " << root1 << std::endl;
-    }
-    else if (discriminant > 0)
-    {
-        root1 = (-b + (sqrt((pow(b, 2)) - (4 * a * c)))) / (2 * a);
-        root2 = (-b - (sqrt((pow(b, 2)) - (4 * a * c)))) / (2 * a);
+            std::cout << std::endl << "B = " << coefficientB << std::endl;
+            break;
+        }
+        case 4:
+        {
+            // Set coefficient (coefficientC)
+            coefficientC = inputInteger("\nEnter coefficient (C): ");
 
-        std::cout << "\n\ttwo real roots are: " << root2 << " and " << root1 << std::endl;
-    }
+            std::cout << std::endl << "C = " << coefficientC << std::endl;
+            break;
+        }
+        case 5:
+        {
+            // Set coefficient (coefficientX)
+            coefficientX = inputInteger("\nEnter coefficient (X): ");
+
+            std::cout << std::endl << "X = " << coefficientX << std::endl;
+
+            double result = 0;
+
+            result = coefficientA * (pow(coefficientX, 2)) + (coefficientB * coefficientX) + coefficientC;
+
+            std::cout << "\t\n" << coefficientA << "(" << coefficientX << "^2) + " << "(" << coefficientB << ")" << "(" << coefficientX << ")" << " + " << coefficientC << " = " << result << std::endl;
+
+            break;
+        }
+        case 6:
+        {
+            double discriminant = 0;
+            double denominator = 0;
+
+            discriminant = (pow(coefficientB, 2)) - (4 * coefficientA * coefficientC);
+            denominator = 2 * coefficientA;
+
+            if (discriminant < 0 || denominator == 0)
+            {
+                std::cout << "\n\tnumber of real roots: 0\n";
+            }
+            else if (discriminant == 0)
+            {
+                std::cout << "\n\tnumber of real roots: 1\n";
+            }
+            else if (discriminant > 0)
+            {
+                std::cout << "\n\tnumber of real roots: 2\n";
+            }
+            break;
+        }
+        case 7:
+        {
+            double discriminant = 0;
+            double denominator = 0;
+            double root1 = 0;
+            double root2 = 0;
+
+            discriminant = (pow(coefficientB, 2)) - (4 * coefficientA * coefficientC);
+            denominator = 2 * coefficientA;
+
+            if (discriminant < 0 || denominator == 0)
+            {
+                std::cout << "\n\tno real roots\n";
+            }
+            else if (discriminant == 0)
+            {
+                root1 = (-coefficientB + (sqrt((pow(coefficientB, 2)) - (4 * coefficientA * coefficientC)))) / (2 * coefficientA);
+
+                std::cout << "\n\tonly real root: " << root1 << std::endl;
+            }
+            else if (discriminant > 0)
+            {
+                root1 = (-coefficientB + (sqrt((pow(coefficientB, 2)) - (4 * coefficientA * coefficientC)))) / (2 * coefficientA);
+                root2 = (-coefficientB - (sqrt((pow(coefficientB, 2)) - (4 * coefficientA * coefficientC)))) / (2 * coefficientA);
+
+                std::cout << "\n\ttwo real roots are: " << root2 << " and " << root1 << std::endl;
+            }
+            break;
+        }
+        default:
+        {
+            std::cout << "\t\tERROR - Invalid option. Please re-enter.";
+            break;
+        }
+        }
+
+        // new line
+        std::cout << "\n";
+        system("pause");
+
+    } while (true);
+
 }
 
 // Pre-Condition: no parameters
 // Post-Condition: no return. Destructor
 QuadraticExpression::~QuadraticExpression()
 {}
+

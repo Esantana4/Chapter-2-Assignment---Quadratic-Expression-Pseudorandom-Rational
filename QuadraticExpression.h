@@ -1,12 +1,17 @@
 #pragma once
+#include <iostream>
+#include <cmath>
 
-// Credit:
-// Joe Bryant & Erik Santana - Quadratic Expression
+// Credit: Joe Bryant & Erik Santana - Quadratic Expression
+
+void mainMenu();
+int inputInteger(std::string prompt);
+int inputInteger(std::string prompt, int startRange, int endRange);
 
 class QuadraticExpression
 {
 private:
-    int a, b, c, x;
+    int coefficientA, coefficientB, coefficientC, coefficientX;
 
 public:
 
@@ -14,64 +19,52 @@ public:
     // Post-Condition: no return. No argument constructor. Initializer constructor
     QuadraticExpression();
 
-    // Pre-Condition: parameters - int coefficientA, int coefficientB, int coefficientC, int coefficientX. These parameters are assigned to the private member variables.
+    // Pre-Condition: parameters - int newCoefficientA, int newCoefficientB, int newCoefficientC, int newCoefficientX. These parameters are assigned to the private member variables.
     // Post-Condition: no return. Argument constructor
-    QuadraticExpression(int coefficientA, int coefficientB, int coefficientC, int coefficientX);
+    QuadraticExpression(int newCoefficientA, int newCoefficientB, int newCoefficientC, int newCoefficientX);
 
-    // Mutators
+    //                                      Mutators
 
-    // Pre-Condition: parameter int coefficientA is assigned to the private member variable a.
-    // Post-Condition: no return. This mutator member function sets/changes the private variable a. 
-    void setA(int coefficientA);
+    // Pre-Condition: parameter int newCoefficientA is assigned to the private member variable coefficientA.
+    // Post-Condition: no return. This mutator member function sets/changes the private variable coefficientA. 
+    void setA(int newCoefficientA);
 
-    // Pre-Condition: parameter int coefficientB is assigned to the private member variable b.
-    // Post-Condition: no return. This mutator member function sets/changes the private variable b. 
-    void setB(int coefficientB);
+    // Pre-Condition: parameter int newCoefficientB is assigned to the private member variable coefficientB.
+    // Post-Condition: no return. This mutator member function sets/changes the private variable coefficientB. 
+    void setB(int newCoefficientB);
 
-    // Pre-Condition: parameter int coefficientC is assigned to the private member variable c.
-    // Post-Condition: no return. This mutator member function sets/changes the private variable c.
-    void setC(int coefficientC);
+    // Pre-Condition: parameter int newCoefficientC is assigned to the private member variable coefficientC.
+    // Post-Condition: no return. This mutator member function sets/changes the private variable coefficientC.
+    void setC(int newCoefficientC);
 
-    // Pre-Condition: parameter int coefficientX is assigned to the private member variable x.
-    // Post-Condition: no return. This mutator member function sets/changes the private variable x. 
-    void setX(int coefficientX);
+    // Pre-Condition: parameter int newCoefficientX is assigned to the private member variable coefficientX.
+    // Post-Condition: no return. This mutator member function sets/changes the private variable coefficientX. 
+    void setX(int newCoefficientX);
 
-
-    // Accessors
+    //                                      Accessors
 
     // Pre-Condition: no parameters.
-    // Post-Condition: returns a. Accessors function to get(view) the value of a
+    // Post-Condition: returns coefficientA. Accessors function to get(view) the value of coefficientA
     int getA() const;
 
     // Pre-Condition: no parameters.
-    // Post-Condition: returns b. Accessors function to get(view) the value of b
+    // Post-Condition: returns coefficientB. Accessors function to get(view) the value of coefficientB
     int getB() const;
 
     // Pre-Condition: no parameters.
-    // Post-Condition: returns c. Accessors function to get(view) the value of c
+    // Post-Condition: returns coefficientC. Accessors function to get(view) the value of coefficientC
     int getC() const;
 
     // Pre-Condition: no parameters.
-    // Post-Condition: returns x. Accessors function to get(view) the value of x
+    // Post-Condition: returns coefficientX. Accessors function to get(view) the value of coefficientX
     int getX() const;
-
-    // Pre-Condition: NA
-    // Post-Condition: prints out quadratic equation
-    void displayEquation() const;
-
-    // Pre-Condition: NA
-    // Post-Condition: prints out result of solved quadratic equation with the given x
-    void getEvaluation() const;
-
-    // Pre-Condition: NA
-    // Post-Condition: prints out number of roots Quadratic equation has
-    void numRoots() const;
-
-    // Pre-Condition: NA
-    // Post-Condition: calculates the roots of quadratic equation and prints
-    void getRoots() const;
 
     // Pre-Condition: no parameters
     // Post-Condition: no return. Destructor
     ~QuadraticExpression();
+
+    // Pre-Condition: no parameters
+    // Post-Condition: no return. Sub menu, user picks an option.
+    void quadraticExpressionMenu();
+
 };
