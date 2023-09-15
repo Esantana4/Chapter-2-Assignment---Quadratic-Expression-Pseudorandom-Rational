@@ -15,7 +15,6 @@
  Otoniel Torres Bernal & John Kim  - Part 3: Rational Number
  */
 
-#include <iomanip>
 #include "QuadraticExpression.h"
 #include "Pseudorandom.h"
 #include "Rational.h"
@@ -57,10 +56,10 @@ void mainMenu()
     {
         switch (option)
         {
-        case 0: exit(1); break;
-        case 1: system("cls"); quadraticExpression.quadraticExpressionMenu(); break;
-        case 2: system("cls"); pseudorandom.pseudorandomMenu(); break;
-        case 3: system("cls"); rational.rational_Menu(); break;
+            case 0: exit(1); break;
+            case 1: system("cls"); quadraticExpression.quadraticExpressionMenu(); break;
+            case 2: system("cls"); pseudorandom.pseudorandomMenu(); break;
+            case 3: system("cls"); rational.rational_Menu(); break;
 
         }
 
