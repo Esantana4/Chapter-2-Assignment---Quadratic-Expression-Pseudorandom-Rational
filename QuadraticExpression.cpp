@@ -81,6 +81,73 @@ int QuadraticExpression::getX() const
 {
     return coefficientX;
 }
+//Precondition: NA
+//Postcondition: prints out number of roots Quadratic equation has
+void QuadraticExpression::numRoots() const
+{
+    double discriminant = 0;
+    double denominator = 0;
+
+    discriminant = (pow(coefficientB, 2)) - (4 * coefficientA * coefficientC);
+    denominator = 2 * coefficientA;
+
+    if (discriminant < 0 || denominator == 0)
+    {
+        std::cout << "\n\tnumber of real roots: 0\n";
+    }
+    else if (discriminant == 0)
+    {
+        std::cout << "\n\tnumber of real roots: 1\n";
+    }
+    else if (discriminant > 0)
+    {
+        std::cout << "\n\tnumber of real roots: 2\n";
+    }
+}
+
+//Precondition: NA
+//Postcondition: prints out result of solved quadratic eqaution with the given x
+void QuadraticExpression::getEvaluation() const
+{
+    std::cout << std::endl << "X = " << coefficientX << std::endl;
+
+    double result = 0;
+
+    result = coefficientA * (pow(coefficientX, 2)) + (coefficientB * coefficientX) + coefficientC;
+
+    std::cout << "\t\n" << coefficientA << "(" << coefficientX << "^2) + " << "(" << coefficientB << ")" << "(" << coefficientX << ")" << " + " << coefficientC << " = " << result << std::endl;
+}
+
+//Precondition: NA
+//Postcondition: calculates the roots of quadratic equation and prints
+void QuadraticExpression::getRoots() const
+{
+    double discriminant = 0;
+    double denominator = 0;
+    double root1 = 0;
+    double root2 = 0;
+
+    discriminant = (pow(coefficientB, 2)) - (4 * coefficientA * coefficientC);
+    denominator = 2 * coefficientA;
+
+    if (discriminant < 0 || denominator == 0)
+    {
+        std::cout << "\n\tno real roots\n";
+    }
+    else if (discriminant == 0)
+    {
+        root1 = (-coefficientB + (sqrt((pow(coefficientB, 2)) - (4 * coefficientA * coefficientC)))) / (2 * coefficientA);
+
+        std::cout << "\n\tonly real root: " << root1 << std::endl;
+    }
+    else if (discriminant > 0)
+    {
+        root1 = (-coefficientB + (sqrt((pow(coefficientB, 2)) - (4 * coefficientA * coefficientC)))) / (2 * coefficientA);
+        root2 = (-coefficientB - (sqrt((pow(coefficientB, 2)) - (4 * coefficientA * coefficientC)))) / (2 * coefficientA);
+
+        std::cout << "\n\ttwo real roots are: " << root2 << " and " << root1 << std::endl;
+    }
+}
 
 // Pre-Condition: no parameters
 // Post-Condition: no return. Sub menu, user picks an option.
@@ -93,34 +160,34 @@ void QuadraticExpression::quadraticExpressionMenu()
         system("cls");
         std::cout << "\t\n1 > Quadratic Menu\n";
         std::cout << "===========================================================\n";
-        std::cout << "1. Display the expression\n";
-        std::cout << "2. Set coefficient (A)\n";
-        std::cout << "3. Set coefficient (B)\n";
-        std::cout << "4. Set coefficient (C)\n";
-        std::cout << "5. Get evaluation (X)\n";
-        std::cout << "6. Get the number of real roots\n";
-        std::cout << "7. Get real root(s)\n";
+        std::cout << "D. Display the expression\n";
+        std::cout << "A. Set coefficient (A)\n";
+        std::cout << "B. Set coefficient (B)\n";
+        std::cout << "C. Set coefficient (C)\n";
+        std::cout << "E. Get evaluation (X)\n";
+        std::cout << "N. Get the number of real roots\n";
+        std::cout << "R. Get real root(s)\n";
         std::cout << "------------------------------------------------------------\n";
         std::cout << "0. Return to Main Menu\n";
         std::cout << "===========================================================\n";
 
         // get user input/option of main menu
-        int option = inputInteger("\n\tOption: ", 0, 7);
+        int option = toupper(inputChar("\n\tOption: ", "ABCDENR0"));
 
         switch (option)
         {
-        case 0:
+        case '0':
         {
             system("cls");
             mainMenu();
             break;
         }
-        case 1:
+        case 'D':
         {
             std::cout << "\t\n" << coefficientA << "x^2 + " << coefficientB << "x + " << coefficientC << std::endl;
             break;
         }
-        case 2:
+        case 'A':
         {
             // Set coefficient (coefficientA)
             coefficientA = inputInteger("\nEnter coefficient (A): ");
@@ -128,7 +195,7 @@ void QuadraticExpression::quadraticExpressionMenu()
             std::cout << std::endl << "A = " << coefficientA << std::endl;
             break;
         }
-        case 3:
+        case 'B':
         {
             // Set coefficient (coefficientB)
             coefficientB = inputInteger("\nEnter coefficient (B): ");
@@ -136,7 +203,7 @@ void QuadraticExpression::quadraticExpressionMenu()
             std::cout << std::endl << "B = " << coefficientB << std::endl;
             break;
         }
-        case 4:
+        case 'C':
         {
             // Set coefficient (coefficientC)
             coefficientC = inputInteger("\nEnter coefficient (C): ");
@@ -144,70 +211,25 @@ void QuadraticExpression::quadraticExpressionMenu()
             std::cout << std::endl << "C = " << coefficientC << std::endl;
             break;
         }
-        case 5:
+        case 'E':
         {
             // Set coefficient (coefficientX)
-            coefficientX = inputInteger("\nEnter coefficient (X): ");
+            coefficientX = inputInteger("\nEnter Variable (X): ");
 
-            std::cout << std::endl << "X = " << coefficientX << std::endl;
-
-            double result = 0;
-
-            result = coefficientA * (pow(coefficientX, 2)) + (coefficientB * coefficientX) + coefficientC;
-
-            std::cout << "\t\n" << coefficientA << "(" << coefficientX << "^2) + " << "(" << coefficientB << ")" << "(" << coefficientX << ")" << " + " << coefficientC << " = " << result << std::endl;
+            getEvaluation();
 
             break;
         }
-        case 6:
+        case 'N':
         {
-            double discriminant = 0;
-            double denominator = 0;
+            numRoots();
 
-            discriminant = (pow(coefficientB, 2)) - (4 * coefficientA * coefficientC);
-            denominator = 2 * coefficientA;
-
-            if (discriminant < 0 || denominator == 0)
-            {
-                std::cout << "\n\tnumber of real roots: 0\n";
-            }
-            else if (discriminant == 0)
-            {
-                std::cout << "\n\tnumber of real roots: 1\n";
-            }
-            else if (discriminant > 0)
-            {
-                std::cout << "\n\tnumber of real roots: 2\n";
-            }
             break;
         }
-        case 7:
+        case 'R':
         {
-            double discriminant = 0;
-            double denominator = 0;
-            double root1 = 0;
-            double root2 = 0;
+            getRoots();
 
-            discriminant = (pow(coefficientB, 2)) - (4 * coefficientA * coefficientC);
-            denominator = 2 * coefficientA;
-
-            if (discriminant < 0 || denominator == 0)
-            {
-                std::cout << "\n\tno real roots\n";
-            }
-            else if (discriminant == 0)
-            {
-                root1 = (-coefficientB + (sqrt((pow(coefficientB, 2)) - (4 * coefficientA * coefficientC)))) / (2 * coefficientA);
-
-                std::cout << "\n\tonly real root: " << root1 << std::endl;
-            }
-            else if (discriminant > 0)
-            {
-                root1 = (-coefficientB + (sqrt((pow(coefficientB, 2)) - (4 * coefficientA * coefficientC)))) / (2 * coefficientA);
-                root2 = (-coefficientB - (sqrt((pow(coefficientB, 2)) - (4 * coefficientA * coefficientC)))) / (2 * coefficientA);
-
-                std::cout << "\n\ttwo real roots are: " << root2 << " and " << root1 << std::endl;
-            }
             break;
         }
         default:
@@ -229,4 +251,3 @@ void QuadraticExpression::quadraticExpressionMenu()
 // Post-Condition: no return. Destructor
 QuadraticExpression::~QuadraticExpression()
 {}
-

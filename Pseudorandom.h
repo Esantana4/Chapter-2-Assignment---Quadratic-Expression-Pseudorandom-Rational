@@ -1,7 +1,7 @@
 #pragma once
+#define _USE_MATH_DEFINES
 #include <iostream>
-#include<vector>
-#include <algorithm>
+#include <cmath>
 
 // Credit:  Saul Merino & John Kim - Pseudorandom
 
@@ -31,10 +31,5 @@ public:
     double generateNextIndirectNum();
     void pseudorandomMenu();
     char pseudorandomMenuOption();
-    void generateIndirectNumTable(Pseudorandom pseudorandom);
-
-    void displayGenerateGaussian();
-    double generateGaussian(const std::vector<int> gaussian);
-    int generateNextNumber();
-    
+    void generateIndirectNumTable();
 };

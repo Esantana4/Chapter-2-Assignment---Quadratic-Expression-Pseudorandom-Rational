@@ -7,6 +7,7 @@
 void mainMenu();
 int inputInteger(std::string prompt);
 int inputInteger(std::string prompt, int startRange, int endRange);
+char inputChar(std::string prompt, std::string options);
 
 class QuadraticExpression
 {
@@ -58,6 +59,18 @@ public:
     // Pre-Condition: no parameters.
     // Post-Condition: returns coefficientX. Accessors function to get(view) the value of coefficientX
     int getX() const;
+
+    //Precondition: NA
+    //Postcondition: prints out number of roots Quadratic equation has
+    void numRoots() const;
+
+    //Precondition: NA
+    //Postcondition: prints out result of solved quadratic eqaution with the given x
+    void getEvaluation() const;
+
+    //Precondition: NA
+    //Postcondition: calculates the roots of quadratic equation and prints
+    void getRoots() const;
 
     // Pre-Condition: no parameters
     // Post-Condition: no return. Destructor

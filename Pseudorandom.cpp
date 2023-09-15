@@ -2,6 +2,8 @@
 
 // Credit:  Saul Merino & John Kim - Pseudorandom
 
+//Precondition: None
+//Postcondition: None
 Pseudorandom::Pseudorandom()
 {
     seed = 1;
@@ -10,50 +12,57 @@ Pseudorandom::Pseudorandom()
     modulus = 729;
 }
 
+int Pseudorandom::getSeed() const
+{
+    return seed;
+}
+
+int Pseudorandom::getMultiplier() const
+{
+    return multiplier;
+}
+int Pseudorandom::getIncrement() const
+{
+    return increment;
+}
+int Pseudorandom::getModulus() const
+{
+    return modulus;
+}
+
+//Precondition: A Positve or Negative Integer
+//Postcondition: None
 void Pseudorandom::setSeed(int newSeed)
 {
     seed = newSeed;
 }
-
+//Precondition: A Positive or Negative Integer
+//Postcondition: None 
 void Pseudorandom::setMultiplier(int newMultiplier)
 {
     multiplier = newMultiplier;
 }
-
+//Precondition: A Positive or Negative Integer
+//Postcondition: None
 void Pseudorandom::setIncrement(int newIncrement)
 {
     increment = newIncrement;
 }
-
+//Precondition: A Positive or Negative Integer
+//Postcondition: None
 void Pseudorandom::setModulus(int newModulus)
 {
     modulus = newModulus;
 }
-
-int Pseudorandom::getSeed() const
-{
-    return seed; 
-}
-
-int Pseudorandom::getMultiplier() const
-{ 
-    return multiplier; 
-}
-int Pseudorandom::getIncrement() const
-{ 
-    return increment;
-}
-int Pseudorandom::getModulus() const
-{ 
-    return modulus;
-}
-
+//Precondition: None
+//Postcondition: None
 void Pseudorandom::generateSeed()
 {
     int newSeed = (multiplier * seed + increment) % modulus;
     setSeed(newSeed);
 }
-
+//Precondition: None
+//Postcondition: Returns a Double
 double Pseudorandom::generateNextIndirectNum()
 {
     generateSeed();
@@ -64,6 +73,7 @@ double Pseudorandom::generateNextIndirectNum()
 // Post-Condition:
 void Pseudorandom::pseudorandomMenu()
 {
+    Pseudorandom pseudorandom;
 
     do
     {
@@ -77,57 +87,57 @@ void Pseudorandom::pseudorandomMenu()
         }
         case 'A':
         {
-            std::cout << "Seed: " << getSeed();
+            std::cout << "Seed: " << pseudorandom.getSeed();
             break;
         }
         case 'B':
         {
-            setSeed(inputInteger("Enter Seed:"));
+            pseudorandom.setSeed(inputInteger("Enter Seed:"));
             break;
         }
         case 'C':
         {
-            std::cout << "Multiplier: " << getMultiplier();
+            std::cout << "Multiplier: " << pseudorandom.getMultiplier();
             break;
         }
         case 'D':
         {
-            setMultiplier(inputInteger("Enter Multiplier:"));
+            pseudorandom.setMultiplier(inputInteger("Enter Multiplier:"));
             break;
         }
         case 'E':
         {
-            std::cout << "Modulus: " << getModulus();
+            std::cout << "Modulus: " << pseudorandom.getModulus();
             break;
         }
         case 'F':
         {
-            setModulus(inputInteger("Enter Modulus:"));
+            pseudorandom.setModulus(inputInteger("Enter Modulus:"));
             break;
         }
         case 'G':
         {
-            std::cout << "Increment: " << getIncrement();
+            std::cout << "Increment: " << pseudorandom.getIncrement();
             break;
         }
         case 'H':
         {
-            setIncrement(inputInteger("Enter Increment:"));
+            pseudorandom.setIncrement(inputInteger("Enter Increment:"));
             break;
         }
         case 'I':
         {
-            generateSeed(); std::cout << getSeed();
+            pseudorandom.generateSeed(); std::cout << pseudorandom.getSeed();
             break;
         }
         case 'J':
         {
-            std::cout << "Indirect Next Number: " << generateNextIndirectNum();
+            std::cout << "Indirect Next Number: " << pseudorandom.generateNextIndirectNum();
             break;
         }
         case 'K':
         {
-            displayGenerateGaussian();
+            pseudorandom.generateIndirectNumTable();
             break;
         }
         default:
@@ -170,67 +180,118 @@ char Pseudorandom::pseudorandomMenuOption()
 
 // Pre-Condition: 
 // Post-Condition:
-void Pseudorandom::generateIndirectNumTable(Pseudorandom pseudorandom)
+void Pseudorandom::generateIndirectNumTable()
 {
-    pseudorandom.setMultiplier(21);
-}
+    const int SIZE = 1000000;
 
-//precondition: going to get the math, using a vector argu so then went print out i can get the information
-//postcondition: going to get the sum , mean, and then return the standard deviation
-double Pseudorandom::generateGaussian(const std::vector<int> gaussian) {
-    double sum = 0.0;
-    //go through the data
-    for (double i : gaussian) {
-        //going to be adding to get the sum
-        sum += i;
-    }
-    double mean = sum / gaussian.size();
-    double squaredSum = 0.0;
-    for (double i : gaussian) {
-        //going to use the pow(lets me square), add all the numbers in the data, call the getMean(mean) function
-        squaredSum += pow(i - mean, 2.0);
-    }
-    //going to then get the square sum and divide it by the size - 1 since thats the formula
-    double totalDev = squaredSum / (gaussian.size() - 1);
-    double standardDev = sqrt(totalDev);
-    return standardDev;
-}
+    double sum = 0;
+    double mean = 0;
+    double difference = 0;
+    double differenceSum = 0;
+    double deviation = 0;
+    double gDistribution = 0;
 
-//precondition: going to be able to display the information
-//postcondition: going to call my member function generateGaussian() to get the gaussian, then show the information
-void Pseudorandom::displayGenerateGaussian() {
-    const int SIZE = 10;
-    //keeping track of the number of occurrences, Size(10, and 0 is the initialize of the values
-    std::vector<int>numberOfOc(SIZE, 0.0);
-    //doing the srand() so it can change random numbers and not be the same
-    srand(time(0));
-    //using the generate function to get the beginning and end of the vector size, then 3rd argu makes it rand()
-    generate(numberOfOc.begin(), numberOfOc.end(), rand);
-    //using the rand() to get random numbers
-    setSeed(rand());
+    int count1 = 0;
+    int count2 = 0;
+    int count3 = 0;
+    int count4 = 0;
+    int count5 = 0;
+    int count6 = 0;
+    int count7 = 0;
+    int count8 = 0;
+    int count9 = 0;
+    int count10 = 0;
+
+    double* dataArray = new double[SIZE];
+
     setMultiplier(rand());
     setIncrement(rand());
     setModulus(rand());
-    std::cout << "\n\t\texperiment of pseudorandom with random multiplier, increment and modulus: \n\n";
-    std::cout << "\t\t" << std::string(76, char(205));
-    std::cout << "\n\t\tmultiplier = " << getMultiplier() << ", increment = " << getIncrement() << ", modulus = " << getModulus();
-    std::cout << "\n\n\t\tRange \t\tNumber of Occurrences";
+    std::cout << "\n\t experiment of pseudorandom with random multiplier, increment and modulus: \n\n";
+    std::cout << "\t============================================================================\n";
+    std::cout << "\tmultiplier = " << multiplier << ", increment = " << increment << ", modulus = " << modulus << std::endl << std::endl;
 
-    for (int i = 0; i < SIZE; i++) {
-        std::cout << "\n\t\t[" << i / static_cast<double>(SIZE) << " ... " << (i + 1) / static_cast<double>(SIZE) << ")\t" << numberOfOc[i];
-        numberOfOc[i] = static_cast<double>(rand()) / RAND_MAX;
+    for (int i = 0; i < SIZE; i++)
+    {
+
+        dataArray[i] = generateNextIndirectNum();
+
+        sum += dataArray[i];
+
+        //std::cout << dataArray[i] << std::endl;
     }
 
-    double gaussianValue = generateGaussian(numberOfOc);
-    std::cout << "\n\n\t\tWith " << SIZE << " uniformly distributed rand number in the range[0...1.0),\n";
-    std::cout << "\t\tthe approximate Gaussian distribution is " << gaussianValue;
-}
+    for (int j = 0; j < SIZE; j++)
+    {
+        if (0 <= dataArray[j] && dataArray[j] < 0.1)
+        {
+            count1++;
+        }
+        else if (0.1 <= dataArray[j] && dataArray[j] < 0.2)
+        {
+            count2++;
+        }
+        else if (0.2 <= dataArray[j] && dataArray[j] < 0.3)
+        {
+            count3++;
+        }
+        else if (0.3 <= dataArray[j] && dataArray[j] < 0.4)
+        {
+            count4++;
+        }
+        else if (0.4 <= dataArray[j] && dataArray[j] < 0.5)
+        {
+            count5++;
+        }
+        else if (0.5 <= dataArray[j] && dataArray[j] < 0.6)
+        {
+            count6++;
+        }
+        else if (0.6 <= dataArray[j] && dataArray[j] < 0.7)
+        {
+            count7++;
+        }
+        else if (0.7 <= dataArray[j] && dataArray[j] < 0.8)
+        {
+            count8++;
+        }
+        else if (0.8 <= dataArray[j] && dataArray[j] < 0.9)
+        {
+            count9++;
+        }
+        else if (0.9 <= dataArray[j] && dataArray[j] < 1)
+        {
+            count10++;
+        }
+    }
 
-//precondition: going to get the next number (member function)
-//postcondition: going to write down the formula to get my next number, then return the next number 
-int Pseudorandom::generateNextNumber() {
-    //formula for generating a sequence of pseudorandom numbers
-    double nextNumber = (multiplier * seed + increment) % modulus;
-    return nextNumber;
-}
+    std::cout << "\tRange           Number of Occurrences\n";
+    std::cout << "\t[0.0 ... 0.1)   " << count1 << std::endl;
+    std::cout << "\t[0.1 ... 0.2)   " << count2 << std::endl;
+    std::cout << "\t[0.2 ... 0.3)   " << count3 << std::endl;
+    std::cout << "\t[0.3 ... 0.4)   " << count4 << std::endl;
+    std::cout << "\t[0.4 ... 0.5)   " << count5 << std::endl;
+    std::cout << "\t[0.5 ... 0.6)   " << count6 << std::endl;
+    std::cout << "\t[0.6 ... 0.7)   " << count7 << std::endl;
+    std::cout << "\t[0.7 ... 0.8)   " << count8 << std::endl;
+    std::cout << "\t[0.8 ... 0.9)   " << count9 << std::endl;
+    std::cout << "\t[0.9 ... 1.0)   " << count10 << std::endl;
 
+    mean = sum / SIZE;
+
+    for (int k = 0; k < SIZE; k++)
+    {
+        difference = pow((dataArray[k] - mean), 2);
+
+        differenceSum += difference;
+    }
+
+    double median = (dataArray[499999] + dataArray[500000]) / 2;
+
+    deviation = sqrt((differenceSum / SIZE));
+
+
+    gDistribution = deviation * (mean - 6) + median;
+
+    delete[] dataArray;
+}

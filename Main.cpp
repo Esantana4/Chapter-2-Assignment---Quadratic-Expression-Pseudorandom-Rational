@@ -5,16 +5,17 @@
 
  Description:
 
- Part 1 works with a quadratic equation using classes.
- Part 2 creates a custom random seed generator that also uses classes.
- Part 3 does math calculations with rational numbers, also uses a class.
+ Part 1 Works with a quadratic equation using classes.
+ Part 2 Creates a custom random seed generator that also uses classes.
+ Part 3 Does math calculations with rational numbers, also uses a class.
 
  Credit:
- Joe Bryant & Erik Santana - Part 1: Quadratic Expression
- Saul Merino & Oscar Gallardo - Part 2: Pseudorandom
- Otoniel Torres Bernal & John Kim  - Part 3: Rational Number
+ Joe Bryant & Erik Santana - Quadratic Expression
+ Saul Merino & John Kim - Pseudorandom
+ Otoniel Torres Bernal & Thanh Tran - Rational Number
  */
 
+#include <iomanip>
 #include "QuadraticExpression.h"
 #include "Pseudorandom.h"
 #include "Rational.h"
@@ -30,6 +31,8 @@ int main()
     return 0;
 }
 
+// Pre-Condition: NA
+// Post-Condition: no return. Main menu
 void mainMenu()
 {
     QuadraticExpression quadraticExpression;
@@ -56,10 +59,10 @@ void mainMenu()
     {
         switch (option)
         {
-            case 0: exit(1); break;
-            case 1: system("cls"); quadraticExpression.quadraticExpressionMenu(); break;
-            case 2: system("cls"); pseudorandom.pseudorandomMenu(); break;
-            case 3: system("cls"); rational.rational_Menu(); break;
+        case 0: exit(1); break;
+        case 1: system("cls"); quadraticExpression.quadraticExpressionMenu(); break;
+        case 2: system("cls"); pseudorandom.pseudorandomMenu(); break;
+        case 3: system("cls"); rational.rational_Menu(); break;
 
         }
 
@@ -68,4 +71,3 @@ void mainMenu()
 
     } while (true);
 }
-
