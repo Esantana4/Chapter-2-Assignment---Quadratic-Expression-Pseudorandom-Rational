@@ -64,7 +64,6 @@ double Pseudorandom::generateNextIndirectNum()
 // Post-Condition:
 void Pseudorandom::pseudorandomMenu()
 {
-    Pseudorandom pseudorandom;
 
     do
     {
@@ -175,52 +174,6 @@ void Pseudorandom::generateIndirectNumTable(Pseudorandom pseudorandom)
 {
     pseudorandom.setMultiplier(21);
 }
-
-
-/*
-double generateGaussian(const std::vector<int>& gaussian) {
-    double sum = 0.0;
-
-    for (int i : gaussian) {
-        sum += i;
-    }
-
-    double mean = sum / gaussian.size();
-    double squaredSum = 0.0;
-
-    for (int i : gaussian) {
-        squaredSum += pow(i - mean, 2.0);
-    }
-
-    double totalDev = squaredSum / (gaussian.size() - 1);
-    double standardDev = sqrt(totalDev);
-    return standardDev;
-}
-
-
-void displayGenerateGaussian() {
-    const int SIZE = 10;
-    std::vector<int> numberOfOc(SIZE, 0.0);
-
-    srand(time(0));
-
-    for (int i = 0; i < SIZE; i++) {
-        numberOfOc[i] = static_cast<double>(rand()) / RAND_MAX;
-    }
-
-    double gaussianValue = generateGaussian(numberOfOc);
-
-    std::cout << "\n\t\tWith " << SIZE << " uniformly distributed rand number in the range[0...1.0),\n";
-    std::cout << "\t\tthe approximate Gaussian distribution is " << gaussianValue;
-}
-
-int generateNextNumber() {
-    double nextNumber = (multiplier() * seed + increment) % modulus;
-    seed = static_cast<int>(nextNumber);
-    return seed;
-}
-
-*/
 
 //precondition: going to get the math, using a vector argu so then went print out i can get the information
 //postcondition: going to get the sum , mean, and then return the standard deviation
