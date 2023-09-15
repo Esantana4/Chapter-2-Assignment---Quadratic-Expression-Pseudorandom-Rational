@@ -12,19 +12,29 @@ Pseudorandom::Pseudorandom()
     modulus = 729;
 }
 
+//Precondition: None
+//Postcondition: returns seed
 int Pseudorandom::getSeed() const
 {
     return seed;
 }
 
+//Precondition: None
+//Postcondition: returns multiplier
 int Pseudorandom::getMultiplier() const
 {
     return multiplier;
 }
+
+//Precondition: None
+//Postcondition: returns increment
 int Pseudorandom::getIncrement() const
 {
     return increment;
 }
+
+//Precondition: None
+//Postcondition: returns modulus
 int Pseudorandom::getModulus() const
 {
     return modulus;
@@ -36,24 +46,28 @@ void Pseudorandom::setSeed(int newSeed)
 {
     seed = newSeed;
 }
+
 //Precondition: A Positive or Negative Integer
 //Postcondition: None 
 void Pseudorandom::setMultiplier(int newMultiplier)
 {
     multiplier = newMultiplier;
 }
+
 //Precondition: A Positive or Negative Integer
 //Postcondition: None
 void Pseudorandom::setIncrement(int newIncrement)
 {
     increment = newIncrement;
 }
+
 //Precondition: A Positive or Negative Integer
 //Postcondition: None
 void Pseudorandom::setModulus(int newModulus)
 {
     modulus = newModulus;
 }
+
 //Precondition: None
 //Postcondition: None
 void Pseudorandom::generateSeed()
@@ -61,6 +75,7 @@ void Pseudorandom::generateSeed()
     int newSeed = (multiplier * seed + increment) % modulus;
     setSeed(newSeed);
 }
+
 //Precondition: None
 //Postcondition: Returns a Double
 double Pseudorandom::generateNextIndirectNum()
@@ -69,8 +84,8 @@ double Pseudorandom::generateNextIndirectNum()
     return static_cast<double>(seed) / modulus;
 }
 
-// Pre-Condition: 
-// Post-Condition:
+// Pre-Condition: NA
+// Post-Condition: no return. Pseudorandom Menu 
 void Pseudorandom::pseudorandomMenu()
 {
     Pseudorandom pseudorandom;
@@ -152,8 +167,8 @@ void Pseudorandom::pseudorandomMenu()
     } while (true);
 }
 
-// Pre-Condition: 
-// Post-Condition:
+// Pre-Condition: NA
+// Post-Condition: returns option. Sub Menu
 char Pseudorandom::pseudorandomMenuOption()
 {
     system("cls");
@@ -178,8 +193,8 @@ char Pseudorandom::pseudorandomMenuOption()
     return option;
 }
 
-// Pre-Condition: 
-// Post-Condition:
+// Pre-Condition: NA
+// Post-Condition: no return
 void Pseudorandom::generateIndirectNumTable()
 {
     const int SIZE = 1000000;
